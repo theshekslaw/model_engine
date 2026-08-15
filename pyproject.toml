@@ -1,0 +1,53 @@
+[project]
+name = "model-engine"
+version = "0.1.0"
+description = "Task-routed LLM gateway backed by Ollama."
+authors = [{ name = "theshekslaw", email = "pandeyabhishek1518@gmail.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic-ai>=2.31.0",
+    "pydantic-settings>=2.15.0",
+    "pyyaml>=6.0.3",
+    "shek-common-utility",
+    "sse-starlette>=3.4.8",
+    "uvicorn[standard]>=0.52.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+shek-common-utility = { git = "ssh://git@github.com/theshekslaw/shek_common_utility.git", rev = "v0.1.0" }
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-httpx>=0.36.2",
+    "ruff>=0.16.3",
+    "types-pyyaml>=6.0.12.20260815",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = ["pydantic_ai.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

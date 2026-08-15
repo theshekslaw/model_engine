@@ -1,0 +1,37 @@
+warm_model: qwen2.5:3b
+
+tasks:
+  chat:
+    provider: ollama
+    model: qwen2.5:3b
+    system_prompt: |
+      You are a concise, technical assistant. Prefer short answers unless the
+      user explicitly asks for depth. Never invent citations.
+    output_schema: null
+
+  summarize_paper:
+    provider: ollama
+    model: qwen2.5:7b
+    system_prompt: |
+      You are a research-paper summarizer. Read the given abstract or excerpt
+      and produce a structured summary as JSON matching the PaperSummary schema.
+      Be faithful to the source; do not add outside knowledge.
+    output_schema: PaperSummary
+
+  mindmap:
+    provider: ollama
+    model: qwen2.5:7b
+    system_prompt: |
+      From the given text, produce (1) a valid Mermaid `mindmap` block ready to
+      paste into Obsidian, and (2) a list of extracted entities with their type.
+      The mindmap must start with `mindmap` on its own line and use standard
+      Mermaid syntax. Output must match the MindmapAndEntities schema.
+    output_schema: MindmapAndEntities
+
+  code:
+    provider: ollama
+    model: qwen2.5-coder:7b
+    system_prompt: |
+      You write concise, working code. Prefer standard library. Include only
+      the code the user asked for; no explanations unless asked.
+    output_schema: null

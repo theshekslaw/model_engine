@@ -1,0 +1,16 @@
+services:
+  model_engine:
+    build:
+      context: .
+      ssh:
+        - default
+    image: model_engine:latest
+    container_name: model_engine
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    mem_limit: 512m
+    volumes:
+      - ./config:/app/config:ro
