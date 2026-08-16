@@ -4,8 +4,6 @@ Canonical style lives in `shek_common_utility`:
 
 <https://github.com/theshekslaw/shek_common_utility/blob/main/.claude/coding_style/python.md>
 
-Any conventions specific to this repo go **below** this section.
-
 ## model_engine-specific rules
 
 - Tasks are declared in `config/tasks.yaml`; adding a task never requires editing route code.
